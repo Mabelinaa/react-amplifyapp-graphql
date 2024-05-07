@@ -14,6 +14,18 @@
     "categories": {
       "auth": {
         "amplifyapp547c74af": {}
+      },
+      "api": {
+        "amplifyapp": {}
+      },
+      "function": {
+        "S3Trigger2027f3ba": {
+          "deploymentBucketName": "amplify-amplifyapp-staging-fd028-deployment",
+          "s3Key": "amplify-builds/S3Trigger2027f3ba-634430394c577a485235-build.zip"
+        }
+      },
+      "storage": {
+        "s3testamplifyv1": {}
       }
     }
   }
