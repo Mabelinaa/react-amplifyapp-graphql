@@ -21,7 +21,7 @@
       "function": {
         "S3Trigger2027f3ba": {
           "deploymentBucketName": "amplify-amplifyapp-staging-fd028-deployment",
-          "s3Key": "amplify-builds/S3Trigger2027f3ba-634430394c577a485235-build.zip"
+          "s3Key": "amplify-builds/S3Trigger2027f3ba-59707167347139476831-build.zip"
         }
       },
       "storage": {

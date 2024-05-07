@@ -18,7 +18,7 @@ import {
 } from "./graphql/mutations";
 
 import { generateClient } from "aws-amplify/api";
-import { Storage } from 'aws-amplify';
+import { uploadData, getUrl, remove } from 'aws-amplify/storage';
 
 
 const client = generateClient();
@@ -32,41 +32,51 @@ const App = ({ signOut }) => {
 
   async function fetchNotes() {
     const apiData = await client.graphql({ query: listTodos });
-    const notesFromAPI = apiData.data.listNotes.items;
-    await Promise.all(
+    const notesFromAPI = apiData.data.listNotes;
+    if (notesFromAPI){
+      await Promise.all(
       notesFromAPI.map(async (note) =>{
         if (note.image) {
-          const url = await Storage.get(note.name);
-          note.image = url;
+          const url = await getUrl({ key: note.name });
+          note.image = url.url;
         }
         return note
       })
     );
     setNotes(notesFromAPI);
+    }
   }
 
   async function createNote(event) {
     event.preventDefault();
     const form = new FormData(event.target);
-    const image = form.get("image");
-    const data = {
-      name: form.get("name"),
-      description: form.get("description"),
-      image: image.name,
-    };
-    if (!!data.image) await Storage.put(data.name, image);
-    await client.graphql({
-      query: createNoteMutation,
-      variables: { input: data },
-    });
-    fetchNotes();
-    event.target.reset();
+  
+    const name = form.get("name");
+  
+    if( name !== null){
+      const image = form.get("image");
+      const data = {
+        name: form.get("name"),
+        description: form.get("description"),
+
+      };
+      if (!!data.image) await uploadData({ key: data.name, data: image });
+      await client.graphql({
+        query: createNoteMutation,
+        variables: { input: data },
+      });
+      fetchNotes();
+      event.target.reset();
+    } else {
+      console.error("El nombre de la nota es null.");  
+    }
   }
+  
 
   async function deleteNote({ id, name }) {
     const newNotes = notes.filter((note) => note.id !== id);
     setNotes(newNotes);
-    await Storage.remove(name);
+    await remove({ key: name });
     await client.graphql({
       query: deleteNoteMutation,
       variables: { input: { id } },
