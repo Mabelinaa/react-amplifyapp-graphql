@@ -1,5 +1,5 @@
 import React from 'react';
-import styled from '@emotion/styled/macro';
+import { styled } from '@mui/system';
 import { Card } from '@mui/material';
 import IconButton from '@mui/material/IconButton';
 import { Close } from '@mui/icons-material';
@@ -28,6 +28,7 @@ const Body = styled('div')({
   flexGrow: 1,
 });
 
+
 const widgetNames = {
   a: "Transcribe",
   b: "Árbol",
@@ -35,7 +36,9 @@ const widgetNames = {
   d: "Notas de la sesión",
 };
 
-export default function Widget({id, onRemoveWidget}) {
+export default function Widget( props ) {
+  
+  const {id, onRemoveWidget } = props;
 
   return (
     <RootCard>

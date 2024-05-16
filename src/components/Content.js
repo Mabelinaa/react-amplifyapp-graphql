@@ -16,6 +16,13 @@ const initialLayouts = {
 
 const originalWidgets = ['b', 'd', 'a', 'c'];
 
+const componentList = {
+  a: 'LineChart',
+  b: 'AreaChart',
+  c: 'BarChart',
+  d: 'ScatterChart'
+};
+
 function Content() {
   const ref = useRef(null);
   const size = useComponentSize(ref);
@@ -76,6 +83,8 @@ function Content() {
           className="layout"
           layouts={layouts}
           onLayoutChange={onLayoutChange}
+          measureBeforeMount={true}
+          useCSSTransforms={true}
           breakpoints={{ lg: 1200, md: 996, sm: 768, xs: 480, xxs: 0 }}
           cols={{ lg: 12, md: 10, sm: 6, xs: 4, xxs: 2 }}
           rowHeight={30}
@@ -84,8 +93,9 @@ function Content() {
           {widgets.map((key) => (
             <div
               key={key}
+              className="widget"
             >
-              <Widget id={key} onRemoveWidget={onRemoveWidget} />
+             <Widget id={key} onRemoveWidget={onRemoveWidget} component={componentList[key]} />
             </div>
           ))}
         </ResponsiveGridLayout>

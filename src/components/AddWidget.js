@@ -1,5 +1,5 @@
 import React from 'react';
-import { styled } from '@mui/material';
+import { styled } from '@mui/system';
 import Popover from '@mui/material/Popover';
 import FormLabel from '@mui/material/FormLabel';
 import FormControl from '@mui/material/FormControl';
@@ -9,11 +9,9 @@ import Checkbox from '@mui/material/Checkbox';
 import IconButton from '@mui/material/IconButton';
 import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
 
-const useStyles = styled((theme) => ({
-  popup: {
-    padding: theme.spacing(2)
-  }
-}));
+const PopUpCard = styled('div')({
+  padding: 2
+});
 
 const widgetNames = {
   a: "Transcribe",
@@ -23,7 +21,7 @@ const widgetNames = {
 };
 
 function AddWidget({ widgets, onRemoveWidget, onAddWidget, originalWidgets }) {
-  const classes = useStyles();
+
   const [anchorEl, setAnchorEl] = React.useState(null);
 
   const handleClick = (event) => {
@@ -64,7 +62,7 @@ function AddWidget({ widgets, onRemoveWidget, onAddWidget, originalWidgets }) {
           horizontal: 'center'
         }}
       >
-        <div className={classes.popup}>
+        <PopUpCard>
           <FormControl component="fieldset">
             <FormLabel component="legend">Select Widgets</FormLabel>
             <FormGroup>
@@ -83,7 +81,7 @@ function AddWidget({ widgets, onRemoveWidget, onAddWidget, originalWidgets }) {
               ))}
             </FormGroup>
           </FormControl>
-        </div>
+        </PopUpCard>
       </Popover>
     </>
   );
