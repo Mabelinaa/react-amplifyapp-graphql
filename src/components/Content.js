@@ -7,14 +7,14 @@ import useComponentSize from '../hooks/useComponentSize';
 
 const initialLayouts = {
   lg: [
-    { i: 'a', x: 0, y: 0, w: 1, h: 2, isDraggable: true, isResizable: true },
     { i: 'b', x: 1, y: 0, w: 3, h: 2, isDraggable: true, isResizable: true },
-    { i: 'c', x: 3, y: 0, w: 1, h: 2, isDraggable: true, isResizable: true },
-    { i: 'd', x: 4, y: 2, w: 2, h: 2, isDraggable: true, isResizable: true },
+    { i: 'd', x: 4, y: 0, w: 2, h: 2, isDraggable: true, isResizable: true },
+    { i: 'a', x: 0, y: 0, w: 1, h: 2, isDraggable: true, isResizable: true },
+    { i: 'c', x: 3, y: 2, w: 1, h: 2, isDraggable: true, isResizable: true },
   ],
 };
 
-const originalWidgets = ['a', 'b', 'c', 'd'];
+const originalWidgets = ['b', 'd', 'a', 'c'];
 
 function Content() {
   const ref = useRef(null);
@@ -50,6 +50,7 @@ function Content() {
 
   const onRemoveWidget = (widgetId) => {
     const newWidgets = widgets.filter((i) => i !== widgetId);
+    console.log(widgetId);
     setWidgets(newWidgets);
     saveToLS('widgets', newWidgets);
   };
