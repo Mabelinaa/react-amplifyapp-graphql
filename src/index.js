@@ -4,10 +4,13 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 
+import "@aws-amplify/ui-react/styles.css";
 import { Amplify } from 'aws-amplify';
 import config from './aws-exports';
-Amplify.configure(config);
+import 'react-grid-layout/css/styles.css';
+import 'react-resizable/css/styles.css';
 
+Amplify.configure(config);
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(

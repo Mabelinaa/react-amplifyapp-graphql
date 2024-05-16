@@ -1,20 +1,25 @@
 import React from "react";
-import { withAuthenticator, ToggleButton } from "@aws-amplify/ui-react";
-import Header from "./components/Header";
-import Home from "./components/Home";
-import Footer from "./components/Footer";
-import SideNav from "./components/SideNav";
+import { withAuthenticator } from "@aws-amplify/ui-react";
+import {Routes, Route, BrowserRouter } from "react-router-dom";
+
+
+import Dashboard from './pages/Dashboard';
+import List from './pages/List';
+import Settings from './pages/Settings';
+
 
 const App = ({ signOut }) => {
 
   return (
-    <div className="wrapper">
-      <Header/>
-      <Home/>
-      <SideNav/>
-      <Footer/>
-      <ToggleButton onClick={signOut}>Cerrar Sesión</ToggleButton>
-    </div>
+    <>
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" signOut={signOut} element={<Dashboard />}></Route>
+          <Route path="/list" signOut={signOut} element={<List />}></Route>
+          <Route path="/settings" signOut={signOut} element={<Settings />}></Route>
+        </Routes>
+      </BrowserRouter>
+    </>
   );
 };
 
